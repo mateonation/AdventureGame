@@ -19,7 +19,7 @@ This includes:
 
 ### Create initial elements of each level
 Each level can contain:
-- [ ] **Controllable block.** <ins>The user controls this block with *'WASD'* keys</ins> and moves in a certain direction whenever one of these keys are pressed.
+- [x] **Controllable block.** <ins>The user controls this block with *'WASD'* keys</ins> and moves in a certain direction whenever one of these keys are pressed.
 - [ ] **Walkable cells.** The player <ins>can move it's block through the white cells</ins> of the grid.
 - [ ] **Obstacle cells.** These cells can be walls, doors and any other element that <ins>prevent the player from walking over them.</ins> These cells are distinguishable from the walkable ones because it's color is different.
 - [ ] **Death cells.** These are different from the previous ones because they <ins>can *kill* the player if they try to walk over them.</ins>
