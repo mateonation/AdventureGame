@@ -15,7 +15,7 @@ Also, there are enemies or "death" cells in each level that will "kill" the play
 This includes:
 - [ ] On the **top of the screen**, a section that shows the _name of the game and it's deveLoper_ ~~(me lol)~~.
 - [ ] On the other hand, the **bottom of the screen** may show _information of the current game,_ such as the _number of the level that the player is playing_ at the moment.
-- [ ] Finally, at the center of the screen it's gonna be located the **game screen** where a _50x25 cell grid (initially)_[^1] is shown to the user and the _different elements_ of each level can be seen.
+- [ ] Finally, at the center of the screen it's gonna be located the **game screen** where a _51x25 cell grid (initially)_[^1] is shown to the user and the _different elements_ of each level can be seen.
 
 ### Create initial elements of each level
 Each level can contain:
@@ -27,7 +27,7 @@ Each level can contain:
 - [ ] **Goal Cell.** The moment the goal in a level is reached, <ins>it's considerated as "completed"</ins> and the player <ins>continues to the next level.</ins>
 
 ### Create the game's grid
-The grid is generated whenever the *.html* file is opened in a web navigator (Chrome, Edge, Firefox...) and it contains a set of 50 columns and 25 rows of cells.
+The grid is generated whenever the *.html* file is opened in a web navigator (Chrome, Edge, Firefox...) and it contains a set of 51 columns and 25 rows of cells.
 Each of these cells has an id that contains it's <ins>X position</ins> and it's <ins>Y position</ins> and these values are useful for placing the elements on the grid.
 > For example, each time the user presses the *'W' key*, it's Y position increments by one and when the *'A' key* gets pressed it's X position decreases by one.
 ![50x25 grid with Y and X axis highlighted in red and blue respectively. Position 0 for both axis is highlighted in gold color.](img/readme/xygrid.png)
@@ -43,3 +43,6 @@ Events that can occur and be done while playing:
 
 > [!NOTE]
 > ***These functions and it's values are subject to modifications and more can be added in the future.***
+
+## UPDATES
+- **19/11/2024:** The number of columns was changed from 50 to 51 so that the distance from 0 to the X-axis limit is the same in either direction.

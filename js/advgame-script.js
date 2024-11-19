@@ -1,4 +1,4 @@
-const totalCells=1250;
+const totalCells=1275;
 let cells=[];
 let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
@@ -23,7 +23,7 @@ function genCells(){
         // Show cell on the screen
         gameGrid.append(cells[i]);
         // If X gets to the final element of the row
-        if(x===(xinitial*-1)-1){
+        if(x===25){
             // Reset X position
             x=xinitial;
             // Decrease Y position by 1
@@ -55,28 +55,28 @@ document.body.addEventListener("keydown", (control)=>{
             // Move up
             case 'w':
                 // Does not move if it can surpass Y positive axis
-                if(y!=12){
+                if(y!=yinitial){
                     y++;
                 }
                 break;
             // Move down
             case 's':
                 // Does not move if it can surpass Y negative axis
-                if(y!=-12){
+                if(y!=yinitial*-1){
                     y--;
                 }
                 break;
             // Move left
             case 'a':
                 // Does not move if it can surpass X negative axis
-                if(x!=-25){
+                if(x!=xinitial){
                     x--;
                 }
                 break;
             // Move right
             case 'd':
                 // Does not move if it can surpass X positive axis
-                if(x!=24){
+                if(x!=xinitial*-1){
                     x++;
                 }
                 break;
