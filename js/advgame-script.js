@@ -36,7 +36,7 @@ function genCells(){
     }
 }
 
-// Function to locate the player
+// FUNCTION TO LOCATE PLAYER ON THE GRID
 function locatePlayer(){
     let playercell=document.getElementById(playerLocation);
     playercell.classList.add('player');
@@ -54,19 +54,31 @@ document.body.addEventListener("keydown", (control)=>{
         switch(control.key){
             // Move up
             case 'w':
-                y++;
+                // Does not move if it can surpass Y positive axis
+                if(y!=12){
+                    y++;
+                }
                 break;
             // Move down
             case 's':
-                y--;
+                // Does not move if it can surpass Y negative axis
+                if(y!=-12){
+                    y--;
+                }
                 break;
             // Move left
             case 'a':
-                x--;
+                // Does not move if it can surpass X negative axis
+                if(x!=-25){
+                    x--;
+                }
                 break;
             // Move right
             case 'd':
-                x++;
+                // Does not move if it can surpass X positive axis
+                if(x!=24){
+                    x++;
+                }
                 break;
         }
         playerLocation=x+"/"+y;
