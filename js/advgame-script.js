@@ -65,7 +65,7 @@ document.body.addEventListener("keydown", (control)=>{
     // Validator of next position to false
     let canmove=false;
     // Execute when one of these keys are pressed
-    if(control.key=='w' || control.key=='a' || control.key=='s' || control.key=='d'){
+    if(control.key=='w' || control.key=='a' || control.key=='s' || control.key=='d' || control.key=='W' || control.key=='A' || control.key=='S' || control.key=='D'){
         // Read current position of the player
         let player=document.getElementById(playerLocation);
         position=player.id.split("/"); //["X","Y"]
@@ -75,6 +75,7 @@ document.body.addEventListener("keydown", (control)=>{
         switch(control.key){
             // Move up
             case 'w':
+            case 'W':
                 // Get future position by incrementing Y by one
                 futurepos=document.getElementById(x+"/"+(y+1));
                 // Does not move if it can surpass Y positive axis
@@ -89,6 +90,7 @@ document.body.addEventListener("keydown", (control)=>{
                 break;
             // Move down
             case 's':
+            case 'S':
                 // Get future position by decreasing Y by one
                 futurepos=document.getElementById(x+"/"+(y-1));
                 // Does not move if it can surpass Y negative axis
@@ -102,6 +104,7 @@ document.body.addEventListener("keydown", (control)=>{
                 break;
             // Move left
             case 'a':
+            case 'A':
                 // Get future position by decreasing X by one
                 futurepos=document.getElementById((x-1)+"/"+y);
                 // Does not move if it can surpass X negative axis
@@ -115,6 +118,7 @@ document.body.addEventListener("keydown", (control)=>{
                 break;
             // Move right
             case 'd':
+            case 'D':
                 // Get future position by incrementing X by one
                 futurepos=document.getElementById((x+1)+"/"+y);
                 // Does not move if it can surpass X positive axis
