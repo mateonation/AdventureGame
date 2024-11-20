@@ -4,6 +4,7 @@ let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
 let x=xinitial;let y=yinitial;
 let spawnpoint="0/0";
+let playerisdead=false;
 let walls_test=[
     "8/9","9/9","10/9","11/9","12/9","13/9","14/9",
     "8/8","9/8","10/8","11/8","12/8","13/8","14/8",
@@ -83,6 +84,9 @@ function locatePlayer(given){
 
 // FUNCTION FOR WHEN USER PRESSES A WASD KEY
 document.body.addEventListener("keydown", (control)=>{
+    if(playerisdead){
+        return;
+    }
     // Validator of next position to false
     let canmove=false;
     // Execute when one of these keys are pressed
@@ -150,16 +154,39 @@ document.body.addEventListener("keydown", (control)=>{
         player.classList.remove('player');
         // Add cell to that cell
         player.classList.add('cell');
-        // Relocating player by using the future position id
+        // Locate player on it's future position
         locatePlayer(futurepos.id);
+        // Locate player on spawn point if they're 'dead'
+        playerDies(futurepos.id);
     }
 });
 
 //FUNCTION THAT VERIFIES NEXT POSITION
 function verifyFuturePosition(futurepos){
-    if(futurepos!=null && futurepos.classList.contains('cell')){
+    // Walk to the future position if it's not null or a wall
+    if(futurepos!=null && !futurepos.classList.contains('wall')){
+        if(futurepos.classList.contains('lava')){
+            // Change state of player is dead to true if they hit lava
+            playerisdead=true;
+        }
         return true;
     }else{
         return false;
+    }
+}
+
+// FUNCTION THAT SPAWNS PLAYER ON IT'S SPAWN POINT EVERYTIME THEY WALK INTO A 'DEATH' CELL
+function playerDies(given){
+    // Execute if player is dead
+    if(playerisdead){
+        let player=document.getElementById(given);
+        setTimeout(()=>{
+            // Remove player from it's position
+            player.classList.remove('player');
+            // Relocate player on it's spawnpoint
+            locatePlayer(spawnpoint);
+            // Change it's state to false
+            playerisdead=false;
+        },400);
     }
 }
