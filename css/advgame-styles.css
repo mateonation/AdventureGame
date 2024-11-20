@@ -50,4 +50,7 @@ body{
     .door-button{
         background:magenta;
     }
+    .goal{
+        background:cyan;
+    }
 }

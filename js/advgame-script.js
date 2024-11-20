@@ -1,8 +1,7 @@
-const totalCells=1275;
 let cells=[];
 let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
-let x=xinitial;let y=yinitial;
+let x;let y;
 let spawnpoint="0/0";
 let playerisdead=false;
 let walls_test=[
@@ -39,15 +38,24 @@ window.onload=function(){
     genLava();
     // Generate door
     genDoor();
+    // Generate goal on the grid
+    genGoal();
 }
 
 // Function to generate the grid cells
 function genCells(){
-    for(i=0;i<totalCells;i++){
+    // Set initial variables for x and y
+    x=xinitial;
+    y=yinitial;
+    for(i=0;i<1275;i++){
         let div=document.createElement('div');
-        div.classList.add('cell');
         // Add XY position
         div.id=x+"/"+y;
+        if(walls_test.contains===div.id){
+            div.classList.add('jeje')
+        }else{
+            div.classList.add('cell');
+        }
         cells.push(div);
         // Show cell on the screen
         gameGrid.append(cells[i]);
@@ -102,12 +110,22 @@ function genDoor(){
     // Add door-button class to the cell
     celltobutton.classList.add('door-button');
 }
+
+// Generate the position the player should reach in order to complete the level
+function genGoal(){
+    let celltogoal=document.getElementById("-10/7");
+    celltogoal.classList.add('goal');
+    celltogoal.classList.remove('cell');
+}
+
 // FUNCTION TO LOCATE PLAYER ON THE GRID
 function locatePlayer(given){
     let playercell=document.getElementById(given);
     if(playercell.classList.contains('door-button')){
         playercell.classList.remove('door-button');
         openDoor();
+    }else if(playercell.classList.contains('goal')){
+        alert('!!you reached the goal!!');
     }else{
         playercell.classList.remove('cell');
     }
@@ -198,7 +216,7 @@ function verifyFuturePosition(futurepos){
     // Walk to the future position if it's not null, wall or a door
     if(futurepos!=null && !futurepos.classList.contains('wall') && !futurepos.classList.contains('door')){
         // Change state of player is dead to true if the cell they move to is not a walkable one
-        if(!futurepos.classList.contains('cell') && !futurepos.classList.contains('door-button')){
+        if(!futurepos.classList.contains('cell') && !futurepos.classList.contains('door-button') && !futurepos.classList.contains('goal')){
             playerisdead=true;
         }
         return true;
