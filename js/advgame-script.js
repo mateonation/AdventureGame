@@ -57,6 +57,7 @@ function genWalls(){
 // FUNCTION TO LOCATE PLAYER ON THE GRID
 function locatePlayer(){
     let playercell=document.getElementById(playerLocation);
+    playercell.classList.remove('cell');
     playercell.classList.add('player');
 }
 
@@ -137,6 +138,7 @@ document.body.addEventListener("keydown", (control)=>{
         }
         playerLocation=x+"/"+y;
         player.classList.remove('player');
+        player.classList.add('cell');
         locatePlayer();
     }
 });
