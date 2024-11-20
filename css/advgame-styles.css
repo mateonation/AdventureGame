@@ -24,13 +24,16 @@ body{
     margin-bottom:auto;
     margin-left:auto;
     margin-right:auto;
-}
-.cell{
-    border:1px solid black;
-    width:24px;
-    height:24px;
-}
-.player{
-    background: green;
-    border:4px solid rgb(0, 26, 255);
+    div{
+        border:1px solid black;
+        width:24px;
+        height:24px;
+    }
+    .player{
+        background: green;
+        border:4px solid rgb(0, 26, 255);
+    }
+    .wall{
+        background:black;
+    }
 }
