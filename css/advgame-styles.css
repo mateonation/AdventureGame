@@ -24,14 +24,19 @@ body{
     margin-bottom:auto;
     margin-left:auto;
     margin-right:auto;
+    border:3px solid #000000;
     div{
-        border:1px solid black;
         width:24px;
         height:24px;
+        background:#61ff61;
+    }
+    .cell:nth-child(even){
+        background:#56d156;
     }
     .player{
-        background: green;
+        background:#ffd700;
         border:4px solid rgb(0, 26, 255);
+        border-radius:2px;
     }
     .wall{
         background:black;
