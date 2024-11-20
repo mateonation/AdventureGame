@@ -17,8 +17,17 @@ let lava_test=[
     "8/-7","9/-7","10/-7","11/-7","12/-7","13/-7","14/-7",
     "8/-6","9/-6","10/-6","11/-6","12/-6","13/-6","14/-6",
     ];
+let door_test=[
+    "-16/9","-15/9","-14/9","-13/9","-12/9","-11/9","-10/9","-9/9","-8/9",
+    "-16/8","-8/8",
+    "-16/7","-8/7",
+    "-16/6","-8/6",
+    "-16/5","-8/5",
+    "-16/4","-15/4","-14/4","-13/4","-12/4","-11/4","-10/4","-9/4","-8/4"
+    ];
 
 window.onload=function(){
+    //TESTING
     //Generate cells
     genCells();
     // Locate player on the grid
@@ -28,6 +37,8 @@ window.onload=function(){
     genWalls();
     // Generate lava on the grid
     genLava();
+    // Generate door
+    genDoor();
 }
 
 // Function to generate the grid cells
@@ -65,20 +76,41 @@ function genWalls(){
     }
 }
 
+// Generate lava on the grid
 function genLava(){
     for(i=0;i<lava_test.length;i++){
         let celltolava=document.getElementById(lava_test[i]);
         // Remove cell class as it won't be a walkable cell
         celltolava.classList.remove('cell');
-        // Add wall class to the cell
+        // Add lava class to the cell
         celltolava.classList.add('lava');
     }
 }
 
+// Generate door and it's button on the grid
+function genDoor(){
+    for(i=0;i<door_test.length;i++){
+        let celltodoor=document.getElementById(door_test[i]);
+        // Remove cell class as it won't be a walkable cell
+        celltodoor.classList.remove('cell');
+        // Add door class to the cell
+        celltodoor.classList.add('door');
+    }
+    let celltobutton=document.getElementById("-8/-6");
+    // Remove cell class as it is different than a walkable cell
+    celltobutton.classList.remove('cell');
+    // Add door-button class to the cell
+    celltobutton.classList.add('door-button');
+}
 // FUNCTION TO LOCATE PLAYER ON THE GRID
 function locatePlayer(given){
     let playercell=document.getElementById(given);
-    playercell.classList.remove('cell');
+    if(playercell.classList.contains('door-button')){
+        playercell.classList.remove('door-button');
+        openDoor();
+    }else{
+        playercell.classList.remove('cell');
+    }
     playercell.classList.add('player');
 }
 
@@ -163,10 +195,10 @@ document.body.addEventListener("keydown", (control)=>{
 
 //FUNCTION THAT VERIFIES NEXT POSITION
 function verifyFuturePosition(futurepos){
-    // Walk to the future position if it's not null or a wall
-    if(futurepos!=null && !futurepos.classList.contains('wall')){
-        if(futurepos.classList.contains('lava')){
-            // Change state of player is dead to true if they hit lava
+    // Walk to the future position if it's not null, wall or a door
+    if(futurepos!=null && !futurepos.classList.contains('wall') && !futurepos.classList.contains('door')){
+        // Change state of player is dead to true if the cell they move to is not a walkable one
+        if(!futurepos.classList.contains('cell') && !futurepos.classList.contains('door-button')){
             playerisdead=true;
         }
         return true;
@@ -188,5 +220,14 @@ function playerDies(given){
             // Change it's state to false
             playerisdead=false;
         },400);
+    }
+}
+
+// FUNCTION THAT CAN OPEN DOORS
+function openDoor(){
+    for(i=0;i<door_test.length;i++){
+        let openthisdoor=document.getElementById(door_test[i]);
+        openthisdoor.classList.remove('door');
+        openthisdoor.classList.add('cell');
     }
 }

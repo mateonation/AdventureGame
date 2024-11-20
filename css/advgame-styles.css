@@ -44,4 +44,10 @@ body{
     .lava{
         background:red;
     }
+    .door{
+        background:burlywood;
+    }
+    .door-button{
+        background:magenta;
+    }
 }
