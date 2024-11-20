@@ -4,10 +4,17 @@ let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
 let x=xinitial;let y=yinitial;
 playerLocation="0/0";
-let walls_1=[
-    "10/7","10/8","10/9",
-    "9/7","9/8","9/9",
-    "8/7","8/8","8/9"
+let walls_test=[
+    "8/9","9/9","10/9","11/9","12/9","13/9","14/9",
+    "8/8","9/8","10/8","11/8","12/8","13/8","14/8",
+    "8/7","9/7","10/7","11/7","12/7","13/7","14/7",
+    "8/6","9/6","10/6","11/6","12/6","13/6","14/6",
+    ];
+let lava_test=[
+    "8/-9","9/-9","10/-9","11/-9","12/-9","13/-9","14/-9",
+    "8/-8","9/-8","10/-8","11/-8","12/-8","13/-8","14/-8",
+    "8/-7","9/-7","10/-7","11/-7","12/-7","13/-7","14/-7",
+    "8/-6","9/-6","10/-6","11/-6","12/-6","13/-6","14/-6",
     ];
 
 window.onload=function(){
@@ -17,6 +24,8 @@ window.onload=function(){
     locatePlayer();
     // Generate walls on the grid
     genWalls();
+    // Generate lava on the grid
+    genLava();
 }
 
 // Function to generate the grid cells
@@ -45,12 +54,22 @@ function genCells(){
 
 // Generate walls on the grid
 function genWalls(){
-    for(i=0;i<walls_1.length;i++){
-        let celltowall=document.getElementById(walls_1[i]);
+    for(i=0;i<walls_test.length;i++){
+        let celltowall=document.getElementById(walls_test[i]);
         // Remove cell class as it won't be a walkable cell
         celltowall.classList.remove('cell');
         // Add wall class to the cell
         celltowall.classList.add('wall');
+    }
+}
+
+function genLava(){
+    for(i=0;i<lava_test.length;i++){
+        let celltolava=document.getElementById(lava_test[i]);
+        // Remove cell class as it won't be a walkable cell
+        celltolava.classList.remove('cell');
+        // Add wall class to the cell
+        celltolava.classList.add('lava');
     }
 }
 
@@ -75,12 +94,11 @@ document.body.addEventListener("keydown", (control)=>{
         let futurepos;
         switch(control.key){
             // Move up
-            case 'w':
-            case 'W':
-                // Get future position by incrementing Y by one
+            case 'w': case 'W':
+                // Get future position incrementing Y by one
                 futurepos=document.getElementById(x+"/"+(y+1));
-                // Does not move if it can surpass Y positive axis
-                if(y!=yinitial && futurepos.classList.contains('cell')){
+                // Player's block doesn't move if the future position is not valid
+                if(verifyFuturePosition(futurepos)){
                     // Actually incrementing Y by one
                     y++;
                     // Validator of the next position is true
@@ -90,12 +108,11 @@ document.body.addEventListener("keydown", (control)=>{
                 }
                 break;
             // Move down
-            case 's':
-            case 'S':
-                // Get future position by decreasing Y by one
+            case 's':case 'S':
+                // Get future position decreasing Y by one
                 futurepos=document.getElementById(x+"/"+(y-1));
-                // Does not move if it can surpass Y negative axis
-                if(y!=yinitial*-1 && futurepos.classList.contains('cell')){
+                // Player's block doesn't move if the future position is not valid
+                if(verifyFuturePosition(futurepos)){
                     y--;
                     // Validator of the next position is true
                     canmove=true;
@@ -104,12 +121,11 @@ document.body.addEventListener("keydown", (control)=>{
                 }
                 break;
             // Move left
-            case 'a':
-            case 'A':
-                // Get future position by decreasing X by one
+            case 'a':case 'A':
+                // Get future position decreasing X by one
                 futurepos=document.getElementById((x-1)+"/"+y);
-                // Does not move if it can surpass X negative axis
-                if(x!=xinitial && futurepos.classList.contains('cell')){
+                // Player's block doesn't move if the future position is not valid
+                if(verifyFuturePosition(futurepos)){
                     x--;
                     // Validator of the next position is true
                     canmove=true;
@@ -118,12 +134,11 @@ document.body.addEventListener("keydown", (control)=>{
                 }
                 break;
             // Move right
-            case 'd':
-            case 'D':
-                // Get future position by incrementing X by one
+            case 'd': case 'D':
+                // Get future position incrementing X by one
                 futurepos=document.getElementById((x+1)+"/"+y);
-                // Does not move if it can surpass X positive axis
-                if(x!=xinitial*-1 && futurepos.classList.contains('cell')){
+                // Player's block doesn't move if the future position is not valid
+                if(verifyFuturePosition(futurepos)){
                     x++;
                     // Validator of the next position is true
                     canmove=true;
@@ -132,7 +147,6 @@ document.body.addEventListener("keydown", (control)=>{
                 }
                 break;
         }
-        // Does not move if the next position validator is false
         if(!canmove){
             return;
         }
@@ -142,3 +156,12 @@ document.body.addEventListener("keydown", (control)=>{
         locatePlayer();
     }
 });
+
+//FUNCTION THAT VERIFIES NEXT POSITION
+function verifyFuturePosition(futurepos){
+    if(futurepos!=null && futurepos.classList.contains('cell')){
+        return true;
+    }else{
+        return false;
+    }
+}
