@@ -3,7 +3,7 @@ let cells=[];
 let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
 let x=xinitial;let y=yinitial;
-playerLocation="0/0";
+let spawnpoint="0/0";
 let walls_test=[
     "8/9","9/9","10/9","11/9","12/9","13/9","14/9",
     "8/8","9/8","10/8","11/8","12/8","13/8","14/8",
@@ -21,7 +21,8 @@ window.onload=function(){
     //Generate cells
     genCells();
     // Locate player on the grid
-    locatePlayer();
+    let playerLocation=spawnpoint;
+    locatePlayer(playerLocation);
     // Generate walls on the grid
     genWalls();
     // Generate lava on the grid
@@ -74,8 +75,8 @@ function genLava(){
 }
 
 // FUNCTION TO LOCATE PLAYER ON THE GRID
-function locatePlayer(){
-    let playercell=document.getElementById(playerLocation);
+function locatePlayer(given){
+    let playercell=document.getElementById(given);
     playercell.classList.remove('cell');
     playercell.classList.add('player');
 }
@@ -87,7 +88,7 @@ document.body.addEventListener("keydown", (control)=>{
     // Execute when one of these keys are pressed
     if(control.key=='w' || control.key=='a' || control.key=='s' || control.key=='d' || control.key=='W' || control.key=='A' || control.key=='S' || control.key=='D'){
         // Read current position of the player
-        let player=document.getElementById(playerLocation);
+        let player=document.getElementsByClassName('player')[0];
         position=player.id.split("/"); //["X","Y"]
         x=parseInt(position[0]);
         y=parseInt(position[1]);
@@ -99,8 +100,6 @@ document.body.addEventListener("keydown", (control)=>{
                 futurepos=document.getElementById(x+"/"+(y+1));
                 // Player's block doesn't move if the future position is not valid
                 if(verifyFuturePosition(futurepos)){
-                    // Actually incrementing Y by one
-                    y++;
                     // Validator of the next position is true
                     canmove=true;
                 }else{
@@ -113,7 +112,6 @@ document.body.addEventListener("keydown", (control)=>{
                 futurepos=document.getElementById(x+"/"+(y-1));
                 // Player's block doesn't move if the future position is not valid
                 if(verifyFuturePosition(futurepos)){
-                    y--;
                     // Validator of the next position is true
                     canmove=true;
                 }else{
@@ -126,7 +124,6 @@ document.body.addEventListener("keydown", (control)=>{
                 futurepos=document.getElementById((x-1)+"/"+y);
                 // Player's block doesn't move if the future position is not valid
                 if(verifyFuturePosition(futurepos)){
-                    x--;
                     // Validator of the next position is true
                     canmove=true;
                 }else{
@@ -139,7 +136,6 @@ document.body.addEventListener("keydown", (control)=>{
                 futurepos=document.getElementById((x+1)+"/"+y);
                 // Player's block doesn't move if the future position is not valid
                 if(verifyFuturePosition(futurepos)){
-                    x++;
                     // Validator of the next position is true
                     canmove=true;
                 }else{
@@ -150,10 +146,12 @@ document.body.addEventListener("keydown", (control)=>{
         if(!canmove){
             return;
         }
-        playerLocation=x+"/"+y;
+        // Remove player from current cell
         player.classList.remove('player');
+        // Add cell to that cell
         player.classList.add('cell');
-        locatePlayer();
+        // Relocating player by using the future position id
+        locatePlayer(futurepos.id);
     }
 });
 
