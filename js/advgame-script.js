@@ -47,7 +47,9 @@ function genCells(){
 function genWalls(){
     for(i=0;i<walls_1.length;i++){
         let celltowall=document.getElementById(walls_1[i]);
-        celltowall.classList.remove('cell')
+        // Remove cell class as it won't be a walkable cell
+        celltowall.classList.remove('cell');
+        // Add wall class to the cell
         celltowall.classList.add('wall');
     }
 }
@@ -67,51 +69,61 @@ document.body.addEventListener("keydown", (control)=>{
         // Read current position of the player
         let player=document.getElementById(playerLocation);
         position=player.id.split("/"); //["X","Y"]
-        x=position[0];
-        y=position[1];
+        x=parseInt(position[0]);
+        y=parseInt(position[1]);
+        let futurepos;
         switch(control.key){
             // Move up
             case 'w':
+                // Get future position by incrementing Y by one
+                futurepos=document.getElementById(x+"/"+(y+1));
                 // Does not move if it can surpass Y positive axis
-                if(y!=yinitial){
+                if(y!=yinitial && futurepos.classList.contains('cell')){
+                    // Actually incrementing Y by one
                     y++;
                     // Validator of the next position is true
                     canmove=true;
                 }else{
-                    canmove=false
+                    canmove=false;
                 }
                 break;
             // Move down
             case 's':
+                // Get future position by decreasing Y by one
+                futurepos=document.getElementById(x+"/"+(y-1));
                 // Does not move if it can surpass Y negative axis
-                if(y!=yinitial*-1){
+                if(y!=yinitial*-1 && futurepos.classList.contains('cell')){
                     y--;
                     // Validator of the next position is true
                     canmove=true;
                 }else{
-                    canmove=false
+                    canmove=false;
                 }
                 break;
             // Move left
             case 'a':
+                // Get future position by decreasing X by one
+                futurepos=document.getElementById((x-1)+"/"+y);
                 // Does not move if it can surpass X negative axis
-                if(x!=xinitial){
+                if(x!=xinitial && futurepos.classList.contains('cell')){
                     x--;
                     // Validator of the next position is true
                     canmove=true;
                 }else{
-                    canmove=false
+                    canmove=false;
                 }
                 break;
             // Move right
             case 'd':
+                // Get future position by incrementing X by one
+                futurepos=document.getElementById((x+1)+"/"+y);
                 // Does not move if it can surpass X positive axis
-                if(x!=xinitial*-1){
+                if(x!=xinitial*-1 && futurepos.classList.contains('cell')){
                     x++;
                     // Validator of the next position is true
                     canmove=true;
                 }else{
-                    canmove=false
+                    canmove=false;
                 }
                 break;
         }
