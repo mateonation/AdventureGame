@@ -20,10 +20,10 @@ This includes:
 ### Create initial elements of each level
 Each level can contain:
 - [x] **Controllable block.** <ins>The user controls this block with *'WASD'* keys</ins> and moves in a certain direction whenever one of these keys are pressed.
-- [ ] **Walkable cells.** The player <ins>can move it's block through the white cells</ins> of the grid.
-- [ ] **Obstacle cells.** These cells can be walls, doors and any other element that <ins>prevent the player from walking over them.</ins> These cells are distinguishable from the walkable ones because it's color is different.
-- [ ] **Death cells.** These are different from the previous ones because they <ins>can *kill* the player if they try to walk over them.</ins>
-- [ ] **Spawn point.** When a player gets *killed* they <ins>get respawned at the start point of each level.</ins>
+- [x] **Walkable cells.** The player <ins>can move it's block through the white cells</ins> of the grid.
+- [x] **Obstacle cells.** These cells can be walls, doors and any other element that <ins>prevent the player from walking over them.</ins> These cells are distinguishable from the walkable ones because it's color is different.
+- [x] **Death cells.** These are different from the previous ones because they <ins>can *kill* the player if they try to walk over them.</ins>
+- [x] **Spawn point.** When a player gets *killed* they <ins>get respawned at the start point of each level.</ins>
 - [ ] **Goal Cell.** The moment the goal in a level is reached, <ins>it's considerated as "completed"</ins> and the player <ins>continues to the next level.</ins>
 
 ### Create the game's grid
