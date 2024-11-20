@@ -2,21 +2,28 @@ let cells=[];
 let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
 let x;let y;
-let spawnpoint="0/0";
 let playerisdead=false;
-let walls_test=[
+
+// ELEMENTS FROM EACH LEVEL
+// COMMON VALUES AND ARRAYS
+let level;
+let spawnpoint=["0/0"];
+let goal=["-10/7"];
+let doorbutton=["-8/-6"];
+// LEVEL 0
+let wall0=[
     "8/9","9/9","10/9","11/9","12/9","13/9","14/9",
     "8/8","9/8","10/8","11/8","12/8","13/8","14/8",
     "8/7","9/7","10/7","11/7","12/7","13/7","14/7",
     "8/6","9/6","10/6","11/6","12/6","13/6","14/6",
     ];
-let lava_test=[
+let lava0=[
     "8/-9","9/-9","10/-9","11/-9","12/-9","13/-9","14/-9",
     "8/-8","9/-8","10/-8","11/-8","12/-8","13/-8","14/-8",
     "8/-7","9/-7","10/-7","11/-7","12/-7","13/-7","14/-7",
     "8/-6","9/-6","10/-6","11/-6","12/-6","13/-6","14/-6",
     ];
-let door_test=[
+let door0=[
     "-16/9","-15/9","-14/9","-13/9","-12/9","-11/9","-10/9","-9/9","-8/9",
     "-16/8","-8/8",
     "-16/7","-8/7",
@@ -27,35 +34,31 @@ let door_test=[
 
 window.onload=function(){
     //TESTING
-    //Generate cells
-    genCells();
-    // Locate player on the grid
-    let playerLocation=spawnpoint;
-    locatePlayer(playerLocation);
-    // Generate walls on the grid
-    genWalls();
-    // Generate lava on the grid
-    genLava();
-    // Generate door
-    genDoor();
-    // Generate goal on the grid
-    genGoal();
+    // Set level number when page is loaded
+    level=0;
+    //Generate game
+    genGame();
 }
 
 // Function to generate the grid cells
-function genCells(){
-    // Set initial variables for x and y
+function genGame(){
+    cells=[];
+    // Set initial variables for x and y before generating cells
     x=xinitial;
     y=yinitial;
     for(i=0;i<1275;i++){
         let div=document.createElement('div');
         // Add XY position
         div.id=x+"/"+y;
-        if(walls_test.contains===div.id){
-            div.classList.add('jeje')
+        // Add a class to the div according to the level's number
+        if(doorbutton[level]===div.id){
+            div.classList.add('door-button');
+        }else if(goal[level]===div.id){
+            div.classList.add('goal');
         }else{
-            div.classList.add('cell');
+            div=modifyCell(div,level);
         }
+        // Push it to the cells array
         cells.push(div);
         // Show cell on the screen
         gameGrid.append(cells[i]);
@@ -71,65 +74,59 @@ function genCells(){
             x++;
         }
     }
+    // After generating all the cells, locate player's block with the level's spawnpoint
+    locatePlayer(spawnpoint[level]);
+    // Show level's number on the bottom section of the page
+    let bottomsection=document.getElementsByClassName('bottom-screen')[0];
+    bottomsection.textContent='LEVEL: '+level;
 }
 
-// Generate walls on the grid
-function genWalls(){
-    for(i=0;i<walls_test.length;i++){
-        let celltowall=document.getElementById(walls_test[i]);
-        // Remove cell class as it won't be a walkable cell
-        celltowall.classList.remove('cell');
-        // Add wall class to the cell
-        celltowall.classList.add('wall');
+// Function to edit cells according to the actual level
+function modifyCell(cell,levelnum){
+    switch(levelnum){
+        // Level 0
+        case 0:
+            // Add 'wall' class to the cell (if it's included on the walls' array associated to it's level)
+            if(wall0.includes(cell.id)){
+                cell.classList.add('wall');
+            }
+            // Add 'lava' class to the cell (if it's included on the lava's array associated to it's level)
+            else if(lava0.includes(cell.id)){
+                cell.classList.add('lava');
+            }
+            // Add 'door' class to the cell (if it's included on the door's array associated to it's level)
+            else if(door0.includes(cell.id)){
+                cell.classList.add('door');
+            }
+            // Add 'door-button' class to the cell (if it's id coincides with the one almacenated on the level number position of the door button's array)
+            
+            // Add 'goal' class to the cell (if it's id coincides with the one almacenated on the level number position of the goal's array)
+            
+            // Add 'cell' class to the cell if no other condition has been met
+            else{
+                cell.classList.add('cell');
+            }
+            return cell;
     }
 }
-
-// Generate lava on the grid
-function genLava(){
-    for(i=0;i<lava_test.length;i++){
-        let celltolava=document.getElementById(lava_test[i]);
-        // Remove cell class as it won't be a walkable cell
-        celltolava.classList.remove('cell');
-        // Add lava class to the cell
-        celltolava.classList.add('lava');
-    }
-}
-
-// Generate door and it's button on the grid
-function genDoor(){
-    for(i=0;i<door_test.length;i++){
-        let celltodoor=document.getElementById(door_test[i]);
-        // Remove cell class as it won't be a walkable cell
-        celltodoor.classList.remove('cell');
-        // Add door class to the cell
-        celltodoor.classList.add('door');
-    }
-    let celltobutton=document.getElementById("-8/-6");
-    // Remove cell class as it is different than a walkable cell
-    celltobutton.classList.remove('cell');
-    // Add door-button class to the cell
-    celltobutton.classList.add('door-button');
-}
-
-// Generate the position the player should reach in order to complete the level
-function genGoal(){
-    let celltogoal=document.getElementById("-10/7");
-    celltogoal.classList.add('goal');
-    celltogoal.classList.remove('cell');
-}
-
 // FUNCTION TO LOCATE PLAYER ON THE GRID
 function locatePlayer(given){
     let playercell=document.getElementById(given);
+    // If the next cell is a door button, it activates the door opening function
     if(playercell.classList.contains('door-button')){
         playercell.classList.remove('door-button');
-        openDoor();
-    }else if(playercell.classList.contains('goal')){
-        alert('!!you reached the goal!!');
+        // Open the door according to it's level number
+        openDoor(level);
     }else{
+        // Remove 'cell' class from the cell the player is going to be
         playercell.classList.remove('cell');
     }
+    // Placing 'player' class on the cell
     playercell.classList.add('player');
+    // If the player reaches the goal, show alert (WIP - HERE IS WHERE THE NEXT LEVEL WOULD BE TRIGGERED)
+    if(playercell.classList.contains('goal')){
+        alert('!!you have succesfully completed level '+level+'!!');
+    }
 }
 
 // FUNCTION FOR WHEN USER PRESSES A WASD KEY
@@ -241,11 +238,17 @@ function playerDies(given){
     }
 }
 
-// FUNCTION THAT CAN OPEN DOORS
-function openDoor(){
-    for(i=0;i<door_test.length;i++){
-        let openthisdoor=document.getElementById(door_test[i]);
-        openthisdoor.classList.remove('door');
-        openthisdoor.classList.add('cell');
+// FUNCTION THAT OPEN DOORS
+function openDoor(levelnum){
+    switch(levelnum){
+        // Open door from level 0
+        case 0:
+            // For every door removed, add a 'cell' class
+            for(i=0;i<door0.length;i++){
+                let openthisdoor=document.getElementById(door0[i]);
+                openthisdoor.classList.remove('door');
+                openthisdoor.classList.add('cell');
+            }
+            break;
     }
 }
