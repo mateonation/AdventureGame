@@ -7,7 +7,7 @@ let playerisdead=false;
 // ELEMENTS FROM EACH LEVEL
 // COMMON VALUES AND ARRAYS
 let level;
-let spawnpoint=["0/0"];
+let spawnpoint=["0/-9"];
 let goal=["-10/7"];
 let doorbutton=["-8/-6"];
 // LEVEL 0
@@ -84,6 +84,10 @@ function genGame(){
 // Function to edit cells according to the actual level
 function modifyCell(cell,levelnum){
     switch(levelnum){
+        // If level number is not included in this switch => it only generates cells
+        default:
+            cell.classList.add('cell');
+            return cell;
         // Level 0
         case 0:
             // Add 'wall' class to the cell (if it's included on the walls' array associated to it's level)
@@ -111,7 +115,15 @@ function modifyCell(cell,levelnum){
 }
 // FUNCTION TO LOCATE PLAYER ON THE GRID
 function locatePlayer(given){
-    let playercell=document.getElementById(given);
+    // Create variable for player's block
+    let playercell;
+    // Generate generic spawn at the center of the grid
+    let genericspawn="0/0";
+    // If the ID 'given' is undefined (this scenario is for a level that does not have a defined spawnpoint)
+    if(given===undefined){
+        given=genericspawn;
+    }
+    playercell=document.getElementById(given);
     // If the next cell is a door button, it activates the door opening function
     if(playercell.classList.contains('door-button')){
         playercell.classList.remove('door-button');
@@ -231,7 +243,7 @@ function playerDies(given){
             // Remove player from it's position
             player.classList.remove('player');
             // Relocate player on it's spawnpoint
-            locatePlayer(spawnpoint);
+            locatePlayer(spawnpoint[level]);
             // Change it's state to false
             playerisdead=false;
         },400);
