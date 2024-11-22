@@ -1,5 +1,6 @@
 *{
     box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 body{
     height:100vh;
@@ -8,11 +9,19 @@ body{
     display:grid;
     grid-template-rows: auto 1fr auto;
 }
-.top-screen{
-    background:red;
+.top-screen,.bottom-screen{
+    background:#0b8992;
+    color:#ffffff;
+    padding:20px;
 }
-.bottom-screen{
-    background:lime;
+.top-screen{
+    font-size:xx-large;
+    font-weight:bold;
+    p{
+        font-size:medium;
+        margin-bottom:0;
+        
+    }
 }
 .game-grid{
     display:grid;
