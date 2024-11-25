@@ -37,12 +37,15 @@ body{
     -webkit-box-shadow: 6px 8px 12px -4px #1f001f8a;
     -moz-box-shadow: 6px 8px 12px -4px #1f001f8a;
     box-shadow: 6px 8px 12px -4px #1f001f8a;
-    .cell{
-        width:24px;
-        height:24px;
+    /*SIZE OF EACH CELL*/
+    div{
+        width:30px;
+        height:30px;
+    }
+    .ground{
         background:#61ff61;
     }
-    .cell:nth-child(even){
+    .ground:nth-child(even){
         background:#56d156;
     }
     .player{
