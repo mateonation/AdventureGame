@@ -60,10 +60,10 @@ body{
         background:red;
     }
     .bridge{
-        background:#965f2d;
+        background:#a86c33;
     }
     .bridge:nth-child(even){
-        background:#a86c33;
+        background:#965f2d;
     }
     .bridge-button{
         background:#c73f00;
