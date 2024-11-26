@@ -59,6 +59,15 @@ body{
     .lava{
         background:red;
     }
+    .bridge{
+        background:#965f2d;
+    }
+    .bridge:nth-child(even){
+        background:#a86c33;
+    }
+    .bridge-button{
+        background:#c73f00;
+    }
     .door{
         background:burlywood;
     }

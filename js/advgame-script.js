@@ -8,9 +8,11 @@ let level=0;
 let spawnpoint="";
 let goal="";
 let doorbutton="";
+let bridgebutton="";
 let wall=[];
 let lava=[];
 let door=[];
+let bridge=[];
 
 // EXECUTE WHEN OPENING THE WINDOW
 window.onload=function(){
@@ -29,7 +31,7 @@ function genGame(){
         // Add XY position
         div.id=x+"/"+y;
         // Add a class to the div according to the level's number
-        div=modifyTile(div,level);
+        div=modifyTileForEachLevel(div,level);
         // Push it to the tiles' array
         tiles.push(div);
         // Show tile on the screen
@@ -54,13 +56,15 @@ function genGame(){
 }
 
 // Function to edit tiles according to the actual level
-function modifyTile(tile,levelnum){
+function modifyTileForEachLevel(tile,levelnum){
     spawnpoint="";
     goal="";
     doorbutton="";
+    bridgebutton="";
     wall=[];
     lava=[];
     door=[];
+    bridge=[];
     switch(levelnum){
         // If level number is not included in this switch => it only generates tiles
         default:
@@ -88,9 +92,11 @@ function modifyTile(tile,levelnum){
                 "-16/5","-8/5",
                 "-16/4","-15/4","-14/4","-13/4","-12/4","-11/4","-10/4","-9/4","-8/4"
                 ];
+            bridge=["10/-6","11/-6","12/-6","10/-7","11/-7","12/-7","10/-8","11/-8","12/-8","10/-9","11/-9","12/-9"];
                 spawnpoint="0/-9";
                 doorbutton="-8/-6";
                 goal="-10/7";
+                bridgebutton="6/-9";
             break;
         case 1:
             wall=["-3/9","-2/9","-1/9","0/9","1/9","2/9","3/9","-4/8","-4/7","-1/7","0/7","1/7","2/7","3/7","17/7","18/7","19/7","-4/6","-2/6","3/6","16/6","20/6","-4/5","-2/5","3/5","16/5","20/5","-4/4","-2/4","3/4","8/4","9/4","10/4","11/4","12/4","16/4","20/4","-4/3","-2/3","3/3","7/3","13/3","16/3","20/3","-4/2","-2/2","3/2","7/2","13/2","16/2","19/2","-3/1","3/1","7/1","10/1","13/1","14/1","15/1","16/1","18/1","20/1","-12/0","-11/0","-10/0","3/0","7/0","10/0","18/0","20/0","-13/-1","-9/-1","-6/-1","3/-1","7/-1","10/-1","13/-1","14/-1","18/-1","20/-1","-13/-2","-9/-2","-6/-2","3/-2","7/-2","11/-2","12/-2","15/-2","18/-2","20/-2","-8/-3","-7/-3","-2/-3","-1/-3","0/-3","1/-3","2/-3","7/-3","13/-3","15/-3","18/-3","20/-3","-9/-4","-6/-4","7/-4","10/-4","13/-4","15/-4","18/-4","20/-4","-9/-5","-6/-5","2/-5","3/-5","4/-5","5/-5","6/-5","10/-5","13/-5","15/-5","18/-5","20/-5","-9/-6","-6/-6","0/-6","1/-6","10/-6","13/-6","15/-6","17/-6","20/-6","-9/-7","-6/-7","-1/-7","4/-7","5/-7","6/-7","7/-7","8/-7","9/-7","15/-7","20/-7","-10/-8","-9/-8","-6/-8","-5/-8","-1/-8","10/-8","14/-8","19/-8","-11/-9","-4/-9","0/-9","1/-9","2/-9","3/-9","4/-9","5/-9","6/-9","7/-9","11/-9","12/-9","13/-9","19/-9","-11/-10","-4/-10","10/-10","20/-10","21/-10","22/-10","23/-10","24/-10","25/-10","-11/-11","-6/-11","-5/-11","0/-11","1/-11","2/-11","3/-11","4/-11","5/-11","6/-11","7/-11","8/-11","9/-11","-10/-12","-9/-12","-8/-12","-7/-12","-1/-12"];
@@ -116,6 +122,8 @@ function modifyTile(tile,levelnum){
     // Add 'door-button' class to the tile (if it's id coincides with the one almacenated on the level number position of the door button's array)
     else if(doorbutton===tile.id){
         tile.classList.add('door-button');
+    }else if(bridgebutton===tile.id){
+        tile.classList.add('bridge-button');
     }
     // Add 'goal' class to the tile (if it's id coincides with the one almacenated on the level number position of the goal's array)
     else if(goal===tile.id){

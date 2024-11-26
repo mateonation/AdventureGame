@@ -6,3 +6,13 @@ function openDoor(){
         openthisdoor.classList.add('ground');
     }
 }
+
+// FUNCTION THAT MAKES BRIDGES VISIBLE
+function deployBridge(){
+    for(i=0;i<bridge.length;i++){
+        let deploythisbridge=document.getElementById(bridge[i]);
+        let firstclass=deploythisbridge.classList.item(0);
+        deploythisbridge.classList.remove(firstclass);
+        deploythisbridge.classList.add('bridge');
+    }
+}
