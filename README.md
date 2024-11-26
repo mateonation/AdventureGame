@@ -1,48 +1,30 @@
 # AdventureGame
 Made by Mateo Fernández Rivera (mateonation)
 
-## DESCRIPTION
+## 📄 DESCRIPTION
 "AdventureGame" is a simple adventure game that i'm creating using *javascript*, *HTML* and *CSS*.
 In this game you control a block that has to reach a goal in each level for them to be completed. Each of these will have different obstacles and tricks that you will have to overcome in order to complete this game.
 
-## HOW TO PLAY
-The player controls with *'WASD'* keys a block that is placed in one of the cells that are shown on the screen. The block can be moved to each one of these cells by pressing the previously mentioned keys.
-On each level there are a set of obstacles that the player may not overpass. These includes walls, doors, and other stuff. When the player tries to walk over these elements, the game won't let him advance, making him move only on walkable cells.
-Also, there are enemies or "death" cells in each level that will "kill" the player if they touch them, making him spawn again at the starting point of the level.
+## 🕹️ CONTROLS / HOW TO PLAY
+The player controls with *'WASD'* keys a block that is placed in one of the tiles that are shown on the screen. The block can be moved to each one of these tiles by pressing the previously mentioned keys.
+On each level there are a set of obstacles that the player may not overpass. These includes walls, doors, and other stuff. When the player tries to walk over these elements, the game won't let him advance, making him move only on walkable tiles.
+Also, there are enemies or "death" tiles in each level that will "kill" the player if they touch them, making him spawn again at the starting point of the level.
 
-## TO DO
-### Make an initial layout
-This includes:
-- [ ] On the **top of the screen**, a section that shows the _name of the game and it's deveLoper_ ~~(me lol)~~.
-- [ ] On the other hand, the **bottom of the screen** may show _information of the current game,_ such as the _number of the level that the player is playing_ at the moment.
-- [ ] Finally, at the center of the screen it's gonna be located the **game screen** where a _51x25 cell grid (initially)_[^1] is shown to the user and the _different elements_ of each level can be seen.
+## ✨ ELEMENTS OF THE GAME
+The next elements are already created tho none has a proper texture (they will be added in the future).
+- _Player's block_ that moves when 'WASD' keys are pressed.
+- _Walls_ that prevent the player from walking through them.
+- _'Death' tiles_ that can respawn the player on level's spawnpoint.
+- _Doors_ and it's _Buttons_ that can open them and allow the player to walk through blocked-before places
+- _Goal points_ are the main objective that the player must reach in each level.
 
-### Create initial elements of each level
-Each level can contain:
-- [x] **Controllable block.** <ins>The user controls this block with *'WASD'* keys</ins> and moves in a certain direction whenever one of these keys are pressed.
-- [x] **Walkable cells.** The player <ins>can move it's block through the white cells</ins> of the grid.
-- [x] **Obstacle cells.** These cells can be walls, doors and any other element that <ins>prevent the player from walking over them.</ins> These cells are distinguishable from the walkable ones because it's color is different.
-- [x] **Death cells.** These are different from the previous ones because they <ins>can *kill* the player if they try to walk over them.</ins>
-- [x] **Spawn point.** When a player gets *killed* they <ins>get respawned at the start point of each level.</ins>
-- [ ] **Goal Cell.** The moment the goal in a level is reached, <ins>it's considerated as "completed"</ins> and the player <ins>continues to the next level.</ins>
-
-### Create the game's grid
-The grid is generated whenever the *.html* file is opened in a web navigator (Chrome, Edge, Firefox...) and it contains a set of 51 columns and 25 rows of cells.
-Each of these cells has an id that contains it's <ins>X position</ins> and it's <ins>Y position</ins> and these values are useful for placing the elements on the grid.
-> For example, each time the user presses the *'W' key*, it's Y position increments by one and when the *'A' key* gets pressed it's X position decreases by one.
-![50x25 grid with Y and X axis highlighted in red and blue respectively. Position 0 for both axis is highlighted in gold color.](img/readme/xygrid.png)
-
-### Basic events
-Events that can occur and be done while playing:
-- If a player presses a *'WASD' key*, their X and Y could update in order to which key was pressed. If the player's X/Y position gets changed, it's going to be reflected on the screen
-- If a player tries to move to a block that's unwalkable, the script won't update their position.
-- If a player makes a move to a *"death" cell*, he will dissappear from that position.
-- When the player gets *"killed"* they're going to be respawned at the starting point of the level.
-- If the level's goal cell is reached, the level will be considered as completed.
-- When a goal is reached, the player gets to the next level.
+## ✍️ TO DO (WIP)
+- [ ] **Level progression.** When player reaches a goal, the game should pop a window congratulating them and continue to the next level.
+- [ ] **Moving enemies.** Initially, make blocks that can move vertically and horizontally. This movement should be looped and when the enemy reaches a wall it starts walking backwards.
+- [ ] **Bridges and it's buttons.** Initially hidden when opening the level but they can be deployed once the player position's themself on the bridge's button, letting them walk through previously blocked places. They work like doors but backwards.
+- [ ] **Worlds.** It's not an adventure game if you don't travel through different places, isn't it? I'm planning to add more worlds with different aspects and elements.
+- [ ] **Doors clossing again.** I want the doors of each level to close again when the player dies, making him complete the whole level without dying.
+- [ ] **More 'death' tiles.** Now we only have 'lava' but i want to add 'water' or 'poison' type of stuff to make the player respawn on the level's spawnpoint everytime they try to walk over them.
 
 > [!NOTE]
 > ***These functions and it's values are subject to modifications and more can be added in the future.***
-
-## UPDATES
-- **19/11/2024:** The number of columns was changed from 50 to 51 so that the distance from 0 to the X-axis limit is the same in either direction.
