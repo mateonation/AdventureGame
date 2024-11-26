@@ -1,6 +1,5 @@
 let playerisdead=false;
 let futurecellfirstclass="ground";
-let dooropened=false;let bridgeopened=false;
 
 // FUNCTION TO LOCATE PLAYER ON THE GRID EVERY TIME THEY MOVE OR SPAWN
 function locatePlayer(given){
@@ -10,14 +9,28 @@ function locatePlayer(given){
     if(playerisdead || futurecellfirstclass==='lava'){
         futurecellfirstclass="ground";
     }
-    // If the future position is a door button: open door
+    // If the future position is a door button:
     if(futurecellfirstclass==='door-button'){
-        // Open the doors of the grid
-        openDoor();
-    // If the future position is a bridge button: deploy bridge
+        // Open door if it's closed
+        if(doorclosed){
+            openDoor();
+            doorclosed=false;
+        // Hide bridge if it's being showed
+        }else{
+            closeDoor();
+            doorclosed=true;
+        }
+    // If the future position is a bridge button:
     }else if(futurecellfirstclass==='bridge-button'){
-        // Deploy bridge on the grid
-        deployBridge();
+        // Show bridge if it's hiding
+        if(bridgehiding){
+            deployBridge();
+            bridgehiding=false;
+        // Hide bridge if it's being showed
+        }else{
+            hideBridge();
+            bridgehiding=true;
+        }
     }else if(futurecellfirstclass==='goal'){
         alert('Congrats! you surpassed level '+level)
     }

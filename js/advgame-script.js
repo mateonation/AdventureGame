@@ -2,6 +2,7 @@ let tiles=[];
 let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
 let x;let y;
+let doorclosed=true;let bridgehiding=true;
 
 // DEFINE ELEMENTS FROM EACH LEVEL
 let level=0;
@@ -22,7 +23,8 @@ window.onload=function(){
 
 // Function to generate the grid tiles
 function genGame(){
-    tiles=[];
+    bridge_savedEl=[];tiles=[];
+    doorclosed=true;bridgehiding=true;
     // Set initial variables for x and y before generating tiles
     x=xinitial;
     y=yinitial;
@@ -92,7 +94,7 @@ function modifyTileForEachLevel(tile,levelnum){
                 "-16/5","-8/5",
                 "-16/4","-15/4","-14/4","-13/4","-12/4","-11/4","-10/4","-9/4","-8/4"
                 ];
-            bridge=["10/-6","11/-6","12/-6","10/-7","11/-7","12/-7","10/-8","11/-8","12/-8","10/-9","11/-9","12/-9"];
+            bridge=["10/9","11/9","12/9","10/8","11/8","12/8","10/7","11/7","12/7","10/6","11/6","12/6","10/-6","11/-6","12/-6","10/-7","11/-7","12/-7","10/-8","11/-8","12/-8","10/-9","11/-9","12/-9"];
                 spawnpoint="0/-9";
                 doorbutton="-8/-6";
                 goal="-10/7";
