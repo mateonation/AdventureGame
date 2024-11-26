@@ -23,7 +23,7 @@ The next elements are already created tho none has a proper texture (they will b
 - [ ] **Moving enemies.** Initially, make blocks that can move vertically and horizontally. This movement should be looped and when the enemy reaches a wall it starts walking backwards.
 - [x] **Bridges and it's buttons.** Initially hidden when opening the level but they can be deployed once the player position's themself on the bridge's button, letting them walk through previously blocked places. They work like doors but backwards.
 - [ ] **Stages.** It's not an adventure game if you don't travel through different places, isn't it? I'm planning to add different stages with different aspects and elements between them.
-- [ ] **Doors/Bridges closing again.** I want the doors and bridges of each level to close or hide again when the player 'dies', making them complete the whole level without dying. Also, the player can open and close them everytime they press it's buttons.
+- [x] **Doors/Bridges closing again.** I want the doors and bridges of each level to close or hide again when the player 'dies', making them complete the whole level without dying. Also, the player can open and close them everytime they press it's buttons.
 - [ ] **More 'death' tiles.** Now we only have 'lava' but i want to add 'water' or 'poison' type of stuff to make the player respawn on the level's spawnpoint everytime they try to walk over them.
 
 > [!NOTE]
