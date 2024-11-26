@@ -115,6 +115,11 @@ function verifyFuturePosition(futurepos){
 function playerDies(given){
     let player=document.getElementById(given);
     setTimeout(()=>{
+        // Close door and hide bridges
+        hideBridge();
+        closeDoor();
+        bridgehiding=true;
+        doorclosed=true;
         // Remove player from it's position
         player.classList.remove('player');
         // Relocate player on it's spawnpoint
