@@ -5,11 +5,28 @@
         <link rel="stylesheet" href="css/advgame-styles.css">
     </head>
     <body>
+        <section class="popup-zone">
+            <section class="top-screen">AdventureGame (WIP)<p>by mateonation</section>
+            <section class="overlay">
+                <section id="howtoplay-popup">
+                    <h1>HOW TO PLAY:</h1>
+                    <table class="wasdkeys">
+                        <tr><td></td><td>W</td><td></td></tr>
+                        <tr><td>A</td><td>S</td><td>D</td></tr>
+                    </table>
+                    <h1>TO CONTROL YOUR PLAYER!</h1>
+                    <button id="howtoplaybtn" onclick="popupManager(this.id);">PLAY!</button>
+                </section>
+            </section>
+            <section class="bottom-screen">BOTTOM SCREEN</section>
+        </section>
         <section class="top-screen">AdventureGame (WIP)<p>by mateonation</section>
         <section class="game-grid"></section>
-        <section class="bottom-screen">BOTTOM SCREEN</section>
+        <section class="bottom-screen" id="bottom-screen">BOTTOM SCREEN</section>
+
         <script src="js/advgame-script.js"></script>
         <script src="js/advgame-player.js"></script>
         <script src="js/advgame-doorbridge.js"></script>
+        <script src="js/advgame-popup.js"></script>
     </body>
 </html>

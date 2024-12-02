@@ -24,6 +24,7 @@ window.onload=function(){
 function genGame(){
     bridge_savedEl=[];tiles=[];
     doorclosed=true;bridgehiding=true;
+    popupshowing=true;
     // Set initial variables for x and y before generating tiles
     x=xinitial;
     y=yinitial;
@@ -52,7 +53,7 @@ function genGame(){
     // After generating all the tiles, locate player's block with the level's spawnpoint
     locatePlayer(spawnpoint);
     // Show level's number on the bottom section of the page
-    let bottomsection=document.getElementsByClassName('bottom-screen')[0];
+    let bottomsection=document.getElementById('bottom-screen');
     bottomsection.textContent='LEVEL: '+level;
 }
 

@@ -37,7 +37,7 @@ function locatePlayer(given){
 
 // FUNCTION FOR WHEN USER PRESSES A WASD KEY
 document.body.addEventListener("keydown", (control)=>{
-    if(playerisdead){
+    if(playerisdead || popupshowing){
         return;
     }
     // Execute when one of these keys are pressed
