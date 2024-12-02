@@ -2,7 +2,6 @@ let tiles=[];
 let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
 let x;let y;
-let doorclosed=true;let bridgehiding=true;
 
 // DEFINE ELEMENTS FROM EACH LEVEL
 let level=2;

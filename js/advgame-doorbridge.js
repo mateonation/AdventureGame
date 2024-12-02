@@ -1,4 +1,5 @@
 let bridge_savedEl=[];
+let doorclosed=true;let bridgehiding=true;
 
 // FUNCTION THAT OPEN DOORS
 function openDoor(){
@@ -7,6 +8,7 @@ function openDoor(){
         openthisdoor.classList.remove('door');
         openthisdoor.classList.add('ground');
     }
+    doorclosed=false;
 }
 
 // FUNCTION THAT OPENS DOORS WITH THE TILES THAT WERE THERE BEFORE IT WAS SHOWED
@@ -17,6 +19,7 @@ function closeDoor(){
         closethisdoor.classList.remove(firstclass);
         closethisdoor.classList.add('door');
     }
+    doorclosed=true;
 }
 
 // FUNCTION THAT MAKES BRIDGES VISIBLE
@@ -29,6 +32,7 @@ function deployBridge(){
         bridge_savedEl.push(firstclass);
         deploythisbridge.classList.add('bridge');
     }
+    bridgehiding=false;
 }
 
 // FUNCTION THAT HIDES BRIDGES WITH THE TILES THAT WERE THERE BEFORE IT WAS SHOWED
@@ -38,4 +42,5 @@ function hideBridge(){
         hidethisbridge.classList.remove('bridge');
         hidethisbridge.classList.add(bridge_savedEl[i]);
     }
+    bridgehiding=true;
 }

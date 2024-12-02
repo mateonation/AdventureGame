@@ -14,22 +14,18 @@ function locatePlayer(given){
         // Open door if it's closed
         if(doorclosed){
             openDoor();
-            doorclosed=false;
         // Hide bridge if it's being showed
         }else{
             closeDoor();
-            doorclosed=true;
         }
     // If the future position is a bridge button:
     }else if(futurecellfirstclass==='bridge-button'){
         // Show bridge if it's hiding
         if(bridgehiding){
             deployBridge();
-            bridgehiding=false;
         // Hide bridge if it's being showed
         }else{
             hideBridge();
-            bridgehiding=true;
         }
     }else if(futurecellfirstclass==='goal'){
         alert('Congrats! you surpassed level '+level)
@@ -115,15 +111,17 @@ function verifyFuturePosition(futurepos){
 function playerDies(given){
     let player=document.getElementById(given);
     setTimeout(()=>{
-        // Close door and hide bridges
-        hideBridge();
-        closeDoor();
-        bridgehiding=true;
-        doorclosed=true;
         // Remove player from it's position
         player.classList.remove('player');
         // Relocate player on it's spawnpoint
         locatePlayer(spawnpoint);
+        // Close door and hide bridges (if they were opened or shown)
+        if(!bridgehiding){
+            hideBridge();
+        }
+        if(!doorclosed){
+            closeDoor();
+        }
         // Change it's state to false
         playerisdead=false;
     },400);
